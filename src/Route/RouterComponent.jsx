@@ -22,7 +22,6 @@ const RouterComponent = () => {
         <Route path="/aboutme" element={<AboutMe />} />
         <Route path="/vans" element={<Vans />} />
         <Route path="/vans/:vanid" element={<VanDetail />} />
-        <Route path="/vans/:id/:type" element={<VanDetail />} />
       </Routes>
     </Router>
   );
