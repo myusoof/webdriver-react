@@ -1,10 +1,10 @@
 import React from "react";
 import { Link, Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import "../server";
 import "../index.css";
 import AboutMe from "../pages/AboutMe";
 import Home from "../pages/Home";
 import Vans from "../pages/Vans";
-
 const RouterComponent = () => {
   return (
     <Router>
@@ -13,9 +13,7 @@ const RouterComponent = () => {
           <Link to="/">#VANLIFE</Link>
         </nav>
         <Link to="/aboutme">About</Link>
-        <nav>
-          <Link to="/vans">Vans</Link>
-        </nav>
+        <Link to="/vans">Vans</Link>
       </header>
 
       <Routes>
