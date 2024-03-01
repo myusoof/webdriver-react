@@ -5,6 +5,7 @@ import "../index.css";
 import AboutMe from "../pages/AboutMe";
 import Home from "../pages/Home";
 import Vans from "../pages/Vans";
+import VanDetail from "../pages/VanDetail";
 const RouterComponent = () => {
   return (
     <Router>
@@ -20,6 +21,8 @@ const RouterComponent = () => {
         <Route path="/" element={<Home />} />
         <Route path="/aboutme" element={<AboutMe />} />
         <Route path="/vans" element={<Vans />} />
+        <Route path="/vans/:vanid" element={<VanDetail />} />
+        <Route path="/vans/:id/:type" element={<VanDetail />} />
       </Routes>
     </Router>
   );
