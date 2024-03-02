@@ -1,27 +1,33 @@
 import React from "react";
-import { Link, Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import "../server";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import Layout from "../components/Layout";
 import "../index.css";
 import AboutMe from "../pages/AboutMe";
+import Dashboard from "../pages/Dashboard";
 import Home from "../pages/Home";
-import Vans from "../pages/Vans";
+import Host from "../components/Host";
+import Income from "../pages/Income";
+import Reviews from "../pages/Reviews";
 import VanDetail from "../pages/VanDetail";
+import Vans from "../pages/Vans";
+import "../server";
 const RouterComponent = () => {
   return (
     <Router>
-      <header>
-        <nav>
-          <Link to="/">#VANLIFE</Link>
-        </nav>
-        <Link to="/aboutme">About</Link>
-        <Link to="/vans">Vans</Link>
-      </header>
-
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/aboutme" element={<AboutMe />} />
-        <Route path="/vans" element={<Vans />} />
-        <Route path="/vans/:vanid" element={<VanDetail />} />
+        <Route element={<Layout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="aboutme" element={<AboutMe />} />
+          <Route path="vans">
+            <Route index element={<Vans />} />
+            <Route path=":vanid" element={<VanDetail />} />
+          </Route>
+          <Route path="host" element={<Host />}>
+            <Route index element={<Dashboard />} />
+            <Route path="income" element={<Income />} />
+            <Route path="reviews" element={<Reviews />} />
+          </Route>
+        </Route>
       </Routes>
     </Router>
   );
