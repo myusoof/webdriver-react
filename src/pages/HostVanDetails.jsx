@@ -2,19 +2,17 @@ import React from "react";
 import { useParams } from "react-router-dom";
 
 const HostVanDetails = () => {
-    const { id } = useParams();
+    const  params = useParams();
     const [currentVan, setCurrentVan] = React.useState(null);
 
     React.useEffect(() => {
-      fetch(`/api/host/vans/${id}`)
+      fetch(`/api/host/vans/${params.id}`)
         .then((res) => res.json())
         .then((data) => setCurrentVan(data.vans));
     }, []);
-    console.log(currentVan)
     if (!currentVan) {
       return <h1>Loading...</h1>;
     }
-
     return (
       <section>
         <div className="host-van-detail-layout-container">
