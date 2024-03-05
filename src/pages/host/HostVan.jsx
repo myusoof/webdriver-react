@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 const HostVan = () => {
   const [vans, setVans] = React.useState([]);
-
   React.useEffect(() => {
     fetch("/api/host/vans")
       .then((res) => res.json())

@@ -1,35 +1,49 @@
 import React from "react";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import {
+  Outlet,
+  Route,
+  BrowserRouter as Router,
+  Routes,
+} from "react-router-dom";
+import HostLayout from "../components/Host";
 import Layout from "../components/Layout";
 import "../index.css";
 import AboutMe from "../pages/AboutMe";
 import Dashboard from "../pages/Dashboard";
 import Home from "../pages/Home";
-import Host from "../components/Host";
 import Income from "../pages/Income";
 import Reviews from "../pages/Reviews";
 import VanDetail from "../pages/VanDetail";
 import Vans from "../pages/Vans";
+import HostPhoto from "../pages/host/HostPhoto";
+import HostPricing from "../pages/host/HostPricing";
+import HostVan from "../pages/host/HostVan";
+import HostVanDetails from "../pages/host/HostVanDetails";
 import "../server";
-import HostVanDetails from "../pages/HostVanDetails";
-import HostVan from "../pages/HostVan";
+import HostDetails from "../pages/host/HostDetails";
 const RouterComponent = () => {
   return (
     <Router>
       <Routes>
         <Route element={<Layout />}>
-          <Route path="/" element={<Home />} />
+          <Route index element={<Home />} />
           <Route path="about" element={<AboutMe />} />
           <Route path="vans">
             <Route index element={<Vans />} />
             <Route path=":vanid" element={<VanDetail />} />
           </Route>
-          <Route path="host" element={<Host />}>
+          <Route path="host" element={<HostLayout />}>
             <Route index element={<Dashboard />} />
             <Route path="income" element={<Income />} />
             <Route path="reviews" element={<Reviews />} />
-            <Route path="vans" element={<HostVan />} />
-            <Route path="vans/:id" element={<HostVanDetails />} />
+            <Route path="vans" element={<Outlet />}>
+              <Route index element={<HostVan />} />
+              <Route path=":id" element={<HostVanDetails />}>
+                <Route index element={<HostDetails />} />
+                <Route path="pricing" element={<HostPricing />} />
+                <Route path="photo" element={<HostPhoto />} />
+              </Route>
+            </Route>
           </Route>
         </Route>
       </Routes>

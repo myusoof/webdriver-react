@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const Header = () => {
   const activeStyles = {
@@ -9,9 +9,9 @@ const Header = () => {
   };
   return (
     <header>
-      <NavLink className="site-logo" to="/">
+      <Link className="site-logo" to="/">
         #VanLife
-      </NavLink>
+      </Link>
       <nav>
         <NavLink
           to="/host"
