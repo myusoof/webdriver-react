@@ -21,12 +21,14 @@ import HostVan from "../pages/host/HostVan";
 import HostVanDetails from "../pages/host/HostVanDetails";
 import "../server";
 import HostDetails from "../pages/host/HostDetails";
+import SearchLayout from "../components/SearchLayout";
 const RouterComponent = () => {
   return (
     <Router>
       <Routes>
         <Route element={<Layout />}>
           <Route index element={<Home />} />
+          <Route path="search" element={<SearchLayout />} />
           <Route path="about" element={<AboutMe />} />
           <Route path="vans">
             <Route index element={<Vans />} />

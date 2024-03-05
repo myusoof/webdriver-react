@@ -4,10 +4,13 @@ import {
   NavLink,
   Outlet,
   useParams,
+  useSearchParams,
 } from "react-router-dom";
 
 const HostVanDetails = () => {
   const params = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+  console.log(searchParams.get("type"));
   const [currentVan, setCurrentVan] = useState(null);
   const activeStyles = {
     fontWeight: "bold",
@@ -61,7 +64,7 @@ const HostVanDetails = () => {
             Photo
           </NavLink>
         </nav>
-         <Outlet context={[currentVan, setCurrentVan  ]} />
+        <Outlet context={[currentVan, setCurrentVan]} />
       </div>
     </section>
   );

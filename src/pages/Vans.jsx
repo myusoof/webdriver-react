@@ -1,15 +1,19 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 const Vans = () => {
   const [vans, setVans] = React.useState([]);
+  const [searchParams] = useSearchParams();
   React.useEffect(() => {
     fetch("/api/vans")
       .then((res) => res.json())
       .then((data) => setVans(data.vans));
   }, []);
-
-  const vanElements = vans.map((van) => (
+  const typeFilter = searchParams.get("type");
+  const filterVanElements = typeFilter
+    ? vans.filter((a) => a.type === searchParams.get("type"))
+    : vans;
+  const vanElements = filterVanElements.map((van) => (
     <div key={van.id} className="van-tile">
       <Link to={`${van.id}`}>
         <img alt={van.name} src={van.imageUrl} />
@@ -28,6 +32,11 @@ const Vans = () => {
   return (
     <div className="van-list-container">
       <h1>Explore our van options</h1>
+      <nav className="host-nav">
+        <Link to="?type=simple">simple</Link>
+        <Link to="?type=rugged">rugged</Link>
+        <Link to="?type=luxury">luxury</Link>
+      </nav>
       <div className="van-list">{vanElements}</div>
     </div>
   );
