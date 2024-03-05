@@ -3,7 +3,6 @@ import {
   Link,
   NavLink,
   Outlet,
-  useOutletContext,
   useParams,
 } from "react-router-dom";
 
