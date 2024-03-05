@@ -33,9 +33,15 @@ const Vans = () => {
     <div className="van-list-container">
       <h1>Explore our van options</h1>
       <nav className="host-nav">
-        <Link to="?type=simple">simple</Link>
-        <Link to="?type=rugged">rugged</Link>
-        <Link to="?type=luxury">luxury</Link>
+        <Link className="van-type simple" to="?type=simple">
+          simple
+        </Link>
+        <Link className="van-type rugged" to="?type=rugged">
+          rugged
+        </Link>
+        <Link className="van-type luxury" to="?type=luxury">
+          luxury
+        </Link>
       </nav>
       <div className="van-list">{vanElements}</div>
     </div>
