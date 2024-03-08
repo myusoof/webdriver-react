@@ -26,7 +26,7 @@ const HostVanDetails = () => {
   }
   return (
     <section>
-      <Link to=".." relative="path" state={ searchParams}>
+      <Link to=".." relative="path">
         &larr; <span>Back to all vans</span>
       </Link>
       <div className="host-van-detail-layout-container">
