@@ -13,6 +13,7 @@ const Vans = () => {
   const filterVanElements = typeFilter
     ? vans.filter((a) => a.type === searchParams.get("type"))
     : vans;
+  console.log(searchParams.toString());
   function genNewSearchParamsUrl(key, value) {
     const sp = new URLSearchParams(searchParams);
     if (value === null) {
@@ -34,7 +35,7 @@ const Vans = () => {
   }
   const vanElements = filterVanElements.map((van) => (
     <div key={van.id} className="van-tile">
-      <Link to={`${van.id}`}>
+      <Link to={`${van.id}`} state={{ search: searchParams.toString(), type: typeFilter }}>
         <img alt={van.name} src={van.imageUrl} />
         <div className="van-info">
           <h3>{van.name}</h3>

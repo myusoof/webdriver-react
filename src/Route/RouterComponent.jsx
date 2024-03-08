@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import HostLayout from "../components/Host";
 import Layout from "../components/Layout";
+import SearchLayout from "../components/SearchLayout";
 import "../index.css";
 import AboutMe from "../pages/AboutMe";
 import Dashboard from "../pages/Dashboard";
@@ -15,18 +16,18 @@ import Income from "../pages/Income";
 import Reviews from "../pages/Reviews";
 import VanDetail from "../pages/VanDetail";
 import Vans from "../pages/Vans";
+import HostDetails from "../pages/host/HostDetails";
 import HostPhoto from "../pages/host/HostPhoto";
 import HostPricing from "../pages/host/HostPricing";
 import HostVan from "../pages/host/HostVan";
 import HostVanDetails from "../pages/host/HostVanDetails";
 import "../server";
-import HostDetails from "../pages/host/HostDetails";
-import SearchLayout from "../components/SearchLayout";
 const RouterComponent = () => {
   return (
     <Router>
       <Routes>
         <Route element={<Layout />}>
+          <Route path="*" element={ <h1>page not found!!!</h1>} />
           <Route index element={<Home />} />
           <Route path="search" element={<SearchLayout />} />
           <Route path="about" element={<AboutMe />} />
