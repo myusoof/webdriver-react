@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
 const HostVan = () => {
   const [vans, setVans] = React.useState([]);
   React.useEffect(() => {
@@ -36,6 +35,7 @@ const HostVan = () => {
         )}
       </div>
     </section>
-  );};
+  );
+};
 
 export default HostVan;

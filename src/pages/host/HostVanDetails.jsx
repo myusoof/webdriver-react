@@ -10,7 +10,6 @@ import {
 const HostVanDetails = () => {
   const params = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
-  console.log(searchParams.get("type"));
   const [currentVan, setCurrentVan] = useState(null);
   const activeStyles = {
     fontWeight: "bold",
@@ -27,8 +26,8 @@ const HostVanDetails = () => {
   }
   return (
     <section>
-      <Link to=".." relative="path">
-        Back to all vans
+      <Link to=".." relative="path" state={ searchParams}>
+        &larr; <span>Back to all vans</span>
       </Link>
       <div className="host-van-detail-layout-container">
         <div className="host-van-detail">
