@@ -9,7 +9,6 @@ import {
 
 const HostVanDetails = () => {
   const params = useParams();
-  const [searchParams] = useSearchParams();
   const [currentVan, setCurrentVan] = useState(null);
   const activeStyles = {
     fontWeight: "bold",

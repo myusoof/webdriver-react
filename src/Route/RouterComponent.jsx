@@ -22,12 +22,12 @@ import HostPricing from "../pages/host/HostPricing";
 import HostVan from "../pages/host/HostVan";
 import HostVanDetails from "../pages/host/HostVanDetails";
 import "../server";
+import NotFound from "../pages/NotFound";
 const RouterComponent = () => {
   return (
     <Router>
       <Routes>
         <Route element={<Layout />}>
-          <Route path="*" element={ <h1>page not found!!!</h1>} />
           <Route index element={<Home />} />
           <Route path="search" element={<SearchLayout />} />
           <Route path="about" element={<AboutMe />} />
@@ -48,6 +48,7 @@ const RouterComponent = () => {
               </Route>
             </Route>
           </Route>
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </Router>
