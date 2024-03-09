@@ -12,7 +12,7 @@ import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import SearchLayout from "./components/SearchLayout";
 import AboutMe from "./pages/AboutMe";
-import Vans from "./pages/Vans";
+import Vans, { getVansData } from "./pages/Vans";
 import VanDetail from "./pages/VanDetail";
 import HostLayout from "./components/Host";
 import Dashboard from "./pages/Dashboard";
@@ -25,6 +25,7 @@ import HostPricing from "./pages/host/HostPricing";
 import HostPhoto from "./pages/host/HostPhoto";
 import NotFound from "./pages/NotFound";
 import RouterComponent from "./Route/RouterComponent";
+import Error from "./pages/Error";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -35,7 +36,7 @@ const router = createBrowserRouter(
       <Route path="search" element={<SearchLayout />} />
       <Route path="about" element={<AboutMe />} />
       <Route path="vans">
-        <Route index element={<Vans />} />
+              <Route index element={<Vans />} loader={getVansData} errorElement={<Error/> } />
         <Route path=":vanid" element={<VanDetail />} />
       </Route>
       <Route path="host" element={<HostLayout />}>

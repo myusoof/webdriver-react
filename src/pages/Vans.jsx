@@ -2,6 +2,11 @@ import React, { useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { getVans } from "../api";
 import "../index.css";
+
+export async function getVansData() {
+  return await getVans()
+}
+
 const Vans = () => {
   const [vans, setVans] = React.useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -14,6 +19,7 @@ const Vans = () => {
         const data = await getVans();
         setVans(data);
       } catch (err) {
+        console.log(err)
         setErr(err);
       } finally {
         setLoading(false)
