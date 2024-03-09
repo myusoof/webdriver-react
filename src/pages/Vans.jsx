@@ -1,14 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
+import { getVans } from "../api";
 import "../index.css";
 const Vans = () => {
   const [vans, setVans] = React.useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
+  const [loading, setLoading] = useState(false);
+  const [err, setErr] = useState(null);
   React.useEffect(() => {
-    fetch("/api/vans")
-      .then((res) => res.json())
-      .then((data) => setVans(data.vans));
+    setLoading(true);
+    async function loadData() {
+      try {
+        const data = await getVans();
+        setVans(data);
+      } catch (err) {
+        setErr(err);
+      } finally {
+        setLoading(false)
+      }
+    }
+    loadData();
   }, []);
+
   const typeFilter = searchParams.get("type");
   const filterVanElements = typeFilter
     ? vans.filter((a) => a.type === searchParams.get("type"))
@@ -23,19 +36,28 @@ const Vans = () => {
     }
     return `?${sp.toString()}`;
   }
-  function handleSearch(key, value) {
-    setSearchParams((prevParams) => {
-      if (value === null) {
-        prevParams.delete(key);
-      } else {
-        prevParams.set(key, value);
-      }
-      return prevParams;
-    });
+  // function handleSearch(key, value) {
+  //   setSearchParams((prevParams) => {
+  //     if (value === null) {
+  //       prevParams.delete(key);
+  //     } else {
+  //       prevParams.set(key, value);
+  //     }
+  //     return prevParams;
+  //   });
+  // }
+  if (loading) {
+    return <h1>loading...</h1>;
+  }
+  if (err) {
+    return <h1>{err.message}</h1>;
   }
   const vanElements = filterVanElements.map((van) => (
     <div key={van.id} className="van-tile">
-      <Link to={`${van.id}`} state={{ search: searchParams.toString(), type: typeFilter }}>
+      <Link
+        to={`${van.id}`}
+        state={{ search: searchParams.toString(), type: typeFilter }}
+      >
         <img alt={van.name} src={van.imageUrl} />
         <div className="van-info">
           <h3>{van.name}</h3>
@@ -48,7 +70,6 @@ const Vans = () => {
       <i className={`van-type ${van.type} selected`}>{van.type}</i>
     </div>
   ));
-
   return (
     <div className="van-list-container">
       <h1>Explore our van options</h1>
@@ -81,14 +102,6 @@ const Vans = () => {
           <Link to={genNewSearchParamsUrl("type", null)}>Clear</Link>
         ) : null}
       </nav>
-      <div>
-        <button onClick={() => handleSearch("type", "simple")}>simple</button>
-        <button onClick={() => handleSearch("type", "rugged")}>rugged</button>
-        <button onClick={() => handleSearch("type", "luxury")}>luxury</button>
-        {typeFilter ? (
-          <button onClick={() => handleSearch("type", null)}>Clear</button>
-        ) : null}
-      </div>
       <div className="van-list">{vanElements}</div>
     </div>
   );
