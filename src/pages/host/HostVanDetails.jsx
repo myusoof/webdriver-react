@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  Link,
-  NavLink,
-  Outlet,
-  useParams,
-  useSearchParams,
-} from "react-router-dom";
+import { Link, NavLink, Outlet, useParams } from "react-router-dom";
 
 const HostVanDetails = () => {
   const params = useParams();

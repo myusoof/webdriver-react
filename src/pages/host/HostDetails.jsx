@@ -1,6 +1,10 @@
 import React from "react";
 import { useOutletContext } from "react-router-dom";
+import { getHostVans } from "../../api";
 
+export async function loader({ params }) {
+  return await getHostVans(params.id);
+}
 const HostDetails = () => {
   const [currentVan] = useOutletContext();
   return (

@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import {
-    Outlet,
-    Route,
-    RouterProvider,
+  Outlet,
+  Route,
+  RouterProvider,
   createBrowserRouter,
   createRoutesFromChildren,
 } from "react-router-dom";
@@ -18,14 +18,15 @@ import HostLayout from "./components/Host";
 import Dashboard from "./pages/Dashboard";
 import Income from "./pages/Income";
 import Reviews from "./pages/Reviews";
-import HostVan from "./pages/host/HostVan";
+import HostVan, { loader as hostVans } from "./pages/host/HostVan";
 import HostVanDetails from "./pages/host/HostVanDetails";
-import HostDetails from "./pages/host/HostDetails";
+import HostDetails, { loader as hostVanDetail } from "./pages/host/HostDetails";
 import HostPricing from "./pages/host/HostPricing";
 import HostPhoto from "./pages/host/HostPhoto";
 import NotFound from "./pages/NotFound";
 import RouterComponent from "./Route/RouterComponent";
 import Error from "./pages/Error";
+import { loader as vanDetailLoader } from "./pages/VanDetail";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -42,7 +43,13 @@ const router = createBrowserRouter(
           loader={getVansData}
           errorElement={<Error />}
         />
-        <Route path=":vanid" element={<VanDetail />} />
+        <Route
+          path=":vanid"
+          element={<VanDetail />}
+          loader={() => {
+            return vanDetailLoader;
+          }}
+        />
       </Route>
       <Route path="host" element={<HostLayout />}>
         <Route
@@ -67,27 +74,9 @@ const router = createBrowserRouter(
           }}
         />
         <Route path="vans" element={<Outlet />}>
-          <Route
-            index
-            element={<HostVan />}
-            loader={async () => {
-              return null;
-            }}
-          />
-          <Route
-            path=":id"
-            element={<HostVanDetails />}
-            loader={async () => {
-              return null;
-            }}
-          >
-            <Route
-              index
-              element={<HostDetails />}
-              loader={async () => {
-                return null;
-              }}
-            />
+          <Route index element={<HostVan />} loader={hostVans} />
+          <Route path=":id" element={<HostVanDetails />}>
+            <Route index element={<HostDetails />} loader={hostVanDetail} />
             <Route
               path="pricing"
               element={<HostPricing />}
@@ -110,8 +99,4 @@ const router = createBrowserRouter(
   )
 );
 root.render(<RouterProvider router={router} />);
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

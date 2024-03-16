@@ -1,6 +1,11 @@
 import React from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
+import { getVans } from "../api";
 
+export async function loader({ params }) {
+  console.log(params);
+  await getVans(params.id);
+}
 const VanDetail = () => {
   const params = useParams();
   const location = useLocation();

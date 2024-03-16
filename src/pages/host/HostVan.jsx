@@ -1,14 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
-const HostVan = () => {
-  const [vans, setVans] = React.useState([]);
-  React.useEffect(() => {
-    fetch("/api/host/vans")
-      .then((res) => res.json())
-      .then((data) => setVans(data.vans));
-  }, []);
+import { Link, useLoaderData } from "react-router-dom";
+import { getHostVans } from "../../api";
 
-  const hostVansEls = vans.map((van) => (
+export async function loader() {
+  return await getHostVans();
+}
+const HostVan = () => {
+  const hostVans = useLoaderData();
+  const hostVansEls = hostVans.map((van) => (
     <Link
       to={`/host/vans/${van.id}`}
       key={van.id}
@@ -28,7 +27,7 @@ const HostVan = () => {
     <section>
       <h1 className="host-vans-title">Your listed vans</h1>
       <div className="host-vans-list">
-        {vans.length > 0 ? (
+        {hostVans.length > 0 ? (
           <section>{hostVansEls}</section>
         ) : (
           <h2>Loading...</h2>
